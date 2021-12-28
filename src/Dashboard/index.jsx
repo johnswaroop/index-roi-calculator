@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './dashboard.module.scss'
 import Graph from '../Graph';
+import './loader.css'
 
 function Dashboard() {
 
@@ -58,7 +59,7 @@ function Dashboard() {
     }
 
 
-    if (!tokenData || !tokenPriceData) return <div className={styles.dashboard}>"loading"</div>
+    if (!tokenData || !tokenPriceData) return <div className={styles.dashboard}><span class="dots-loader">Loading…</span></div>
 
     return (
         <div className={styles.dashboard}>
