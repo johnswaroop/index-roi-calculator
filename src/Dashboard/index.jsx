@@ -126,7 +126,7 @@ function Dashboard() {
                         </div>
                         <form className={styles.input} onSubmit={(e) => { e.preventDefault(); calculate(); }} >
                             <span className={styles.inputBox + ' ' + styles.corpus}>
-                                <input required type="text" value={inputForm.corpus} name={"corpus"}
+                                <input required type="number" value={inputForm.corpus} name={"corpus"}
                                     onChange={(e) => { setInputForm((form) => { form[e.target.name] = e.target.value; return { ...form } }) }} />
                             </span>
                             <span className={styles.inputBox + ' ' + styles.date}>
@@ -138,8 +138,18 @@ function Dashboard() {
 
                             <div className={styles.quickTime}>
                                 <ul>
-                                    <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(30); return { ...f }; }) }}>1M</li>
-                                    <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(90); return { ...f }; }) }}>3M</li>
+
+                                    {((selectedToken == "index-coop-eth-2x-flexible-leverage-index")) ?
+                                        <>
+                                            <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(14); return { ...f }; }) }}>2W</li>
+                                            <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(21); return { ...f }; }) }}>3W</li>
+                                        </>
+                                        :
+                                        <>
+                                            <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(30); return { ...f }; }) }}>1M</li>
+                                            <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(90); return { ...f }; }) }}>3M</li>
+                                        </>
+                                    }
                                     {((selectedToken == 'defipulse-index') || (selectedToken == 'eth-2x-flexible-leverage-index')) && <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(180); return { ...f }; }) }}>6M</li>}
                                     {(selectedToken == 'defipulse-index') && <li onClick={() => { setInputForm((f) => { f.date = dateBeforeDays(365); return { ...f }; }) }}>1Y</li>}
                                 </ul>
