@@ -45,7 +45,7 @@ function Dashboard() {
         let p1 = tokenPriceData[selectedToken][date];
         let p2 = tokenPriceData[selectedToken][todaysDateinYMD()];
         let corpus = parseFloat(inputForm.corpus);
-
+        console.log(todaysDateinYMD(),p1,p2,corpus);
         let units = (corpus / p1);
         let currentValue = units * p2;
         setResult({ currentValue: round2(currentValue), PNL: round2(currentValue - corpus), percentGain: round2(((currentValue - corpus) / corpus) * 100) });
@@ -271,8 +271,25 @@ const timestampToYMD = (timestamp) => {
 
 const todaysDateinYMD = () => {
     let date = new Date().toLocaleDateString("en-US");
+    console.log(date);
     let splitDate = date.split("/");
-    return `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`
+    let y = splitDate[2];
+    let m = splitDate[0];
+    let d = splitDate[1];
+
+    d = `${d}`;
+    m = `${m}`;
+
+    if (d.length <= 1) {
+        d = '0' + d;
+    }
+
+
+    if (m.length <= 1) {
+        m = '0' + m;
+    }
+
+    return `${y}-${m}-${d}`
 }
 
 const dateBeforeDays = (days) => {
@@ -321,7 +338,6 @@ function get00(value) {
     return value;
 }
 
-console.log(dateBeforeDays(5));
 
 function generateGraphData(pricedata, input, units) {
 
